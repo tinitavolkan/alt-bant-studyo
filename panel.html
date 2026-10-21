@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111318">
+  <title>Alt Bant Stüdyosu · OBS</title>
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="panel.html"><span class="brand-icon" aria-hidden="true">≋</span> ALT BANT <span>STÜDYOSU</span></a><span class="topnote">OBS için hazır</span></header>
+  <main>
+    <div class="intro"><div><p class="eyebrow">YAYININ, SENİN KONTROLÜNDE</p><h1>Ne aksın?</h1><p>Metnini yaz, görünümünü ayarla, bağlantıyı OBS’e ekle.</p></div><button class="quiet" id="reset" type="button">Varsayılana dön</button></div>
+    <div class="workspace">
+      <form id="controls" class="controls">
+        <section class="card"><h2><span>01</span> Metin</h2>
+          <label for="title">Sol başlık</label><input id="title" maxlength="50" value="YAYIN KURALLARI">
+          <label class="check"><input id="showLabel" type="checkbox" checked> Sol başlığı göster</label>
+          <div class="field-head"><label for="text">Kayan yazılar</label><span id="count"></span></div>
+          <textarea id="text" rows="9" maxlength="4000" spellcheck="false"></textarea>
+          <p class="hint">Her satır ayrı bir öğe olur. Aralarına nokta eklenir.</p>
+        </section>
+        <section class="card"><h2><span>02</span> Hareket ve boyut</h2>
+          <div class="field-head"><label for="speed">Kayma hızı</label><output id="speedValue" for="speed"></output></div><input id="speed" type="range" min="0" max="300" step="5"><p class="hint">0 durdurur · yüksek değer daha hızlı akar.</p>
+          <label for="direction">Akış yönü</label><select id="direction"><option value="left">Sağdan sola ←</option><option value="right">Soldan sağa →</option></select>
+          <label for="font">Yazı tipi</label><select id="font"><option value="segoe">Segoe UI</option><option value="arial">Arial</option><option value="verdana">Verdana</option><option value="georgia">Georgia</option></select>
+          <div class="field-head"><label for="fontSize">Yazı boyutu</label><output id="fontSizeValue" for="fontSize"></output></div><input id="fontSize" type="range" min="18" max="64">
+          <div class="field-head"><label for="height">Bant yüksekliği</label><output id="heightValue" for="height"></output></div><input id="height" type="range" min="70" max="160">
+          <div class="field-head"><label for="radius">Köşe yuvarlaklığı</label><output id="radiusValue" for="radius"></output></div><input id="radius" type="range" min="0" max="32">
+        </section>
+        <section class="card"><h2><span>03</span> Renkler</h2>
+          <div class="colors"><label>Vurgu<input id="accent" type="color"></label><label>Kayan yazı<input id="textColor" type="color"></label><label>Başlık yazısı<input id="labelColor" type="color"></label><label>Bant zemini<input id="background" type="color"></label></div>
+          <div class="field-head"><label for="opacity">Zemin opaklığı</label><output id="opacityValue" for="opacity"></output></div><input id="opacity" type="range" min="0" max="100">
+          <p class="hint">0 tamamen şeffaf, 100 tamamen dolu zemin.</p>
+        </section>
+      </form>
+      <div class="result"><section class="preview-card"><div class="preview-heading"><h2>Yayında böyle görünecek</h2><span class="live"><i></i> CANLI ÖNİZLEME</span></div><div class="preview-area"><div class="preview-caption">ŞEFFAF YAYIN ALANI</div><div class="frame-wrap" id="frameWrap"><iframe id="preview" src="overlay.html" title="Alt bant önizlemesi" tabindex="-1"></iframe></div></div><div class="preview-footer"><span>OBS kaynağı: <b>1920 × 200</b></span><span id="saveState" role="status">Hazırlanıyor…</span></div></section>
+        <section class="card export"><p class="eyebrow">YAYINA TAŞI</p><h2>OBS bağlantın hazır.</h2><p>Bu bağlantı tüm ayarlarını taşır. Panel kapalıyken de çalışır.</p>
+          <label for="obsUrl">OBS Tarayıcı kaynağı URL’si</label><textarea id="obsUrl" readonly rows="3" spellcheck="false"></textarea>
+          <div class="actions"><button class="primary" id="copy" type="button">OBS bağlantısını kopyala <span aria-hidden="true">↗</span></button><a class="quiet" id="openOverlay" target="_blank" rel="noopener">Bandı aç</a></div>
+          <p id="copyState" class="copy-state" role="status" aria-live="polite"></p>
+          <textarea id="manualCopy" aria-label="Elle kopyalanacak bağlantı" readonly hidden rows="3"></textarea>
+          <ol class="steps"><li>OBS’te <b>Kaynaklar → + → Tarayıcı</b> seç.</li><li><b>Yerel dosya</b> kapalıyken bağlantıyı URL alanına yapıştır.</li><li>Genişlik <b>1920</b>, yükseklik <b>200</b> yap. Kaynağı ekranın altına yerleştir.</li></ol>
+          <div class="notice">Ayar değiştirdiğinde yeni bağlantıyı kopyalayıp OBS’teki URL’yi güncelle. Paneldeki değişiklikler mevcut OBS bağlantısına otomatik aktarılmaz.</div>
+        </section>
+        <section class="card portable"><h2>Kaldığın yerden devam et</h2><p>Ayarlar bu tarayıcıda saklanır. Başka bilgisayarda düzenlemek için ayar bağlantını kaydet.</p><button class="quiet" type="button" id="copyEditor">Ayar bağlantısını kopyala</button>
+          <details><summary>Elimdeki OBS bağlantısını düzenle</summary><label for="importUrl">OBS bağlantısı</label><textarea id="importUrl" rows="2" placeholder="Daha önce oluşturduğun bağlantıyı buraya yapıştır"></textarea><button class="quiet" type="button" id="import">Ayarları yükle</button><p id="importState" class="hint" role="status"></p></details>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer>Sen ayarla. Bant aksın. <span>Bilgisayardan bağımsız, bağlantıyla çalışan alt bant.</span></footer>
+  <script src="ticker-config.js"></script><script src="panel.js"></script>
+</body>
+</html>

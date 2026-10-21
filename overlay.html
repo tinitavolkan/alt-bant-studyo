@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OBS Alt Bant</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width:100%; height:100%; margin:0; overflow:hidden; background:transparent; color-scheme:dark; }
+    .band { position:absolute; left:20px; right:20px; bottom:16px; display:flex; overflow:hidden; border:1px solid #ffffff2b; border-bottom:4px solid var(--accent); }
+    .label { flex-shrink:0; max-width:40%; display:flex; align-items:center; justify-content:center; padding:0 26px; background:var(--accent); color:var(--label-color); font-size:var(--label-size); font-weight:900; white-space:nowrap; overflow:hidden; }
+    .label span { overflow:hidden; text-overflow:ellipsis; }
+    .label[hidden] { display:none; }
+    .window { flex:1; min-width:0; display:flex; align-items:center; overflow:hidden; }
+    .track { display:flex; width:max-content; will-change:transform; visibility:hidden; }
+    .group { flex-shrink:0; display:flex; align-items:center; white-space:nowrap; font-weight:650; }
+    .item { display:inline-flex; align-items:center; }
+    .item::after { content:''; width:7px; height:7px; border-radius:50%; background:var(--accent); margin:0 32px; flex-shrink:0; }
+    .warning { color:var(--accent); font-weight:900; }
+    .item span { white-space:pre; }
+    @keyframes scroll { from { transform:translateX(0); } to { transform:translateX(calc(-1 * var(--distance))); } }
+  </style>
+</head>
+<body>
+  <div class="band" id="band" role="region" aria-label="Kayan yayın metni">
+    <div class="label" id="label"><span id="title"></span></div>
+    <div class="window" id="window"><div class="track" id="track"></div></div>
+  </div>
+  <script src="ticker-config.js"></script>
+  <script src="overlay.js"></script>
+</body>
+</html>
